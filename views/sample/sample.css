@@ -1,0 +1,31 @@
+.svg-icon {
+    position: relative;
+    top: .125em;
+}
+.nav-left .nav-link:hover {
+    color: #bd2130;
+}
+.white-space-normal {
+    white-space: normal;
+}
+.profile-image-topbar {
+    height: 54px;
+    width: 54px;
+    background-color: white;
+}
+.profile-image-info {
+    height: 128px;
+    width: 128px;
+    background-color: white;
+}
+.custom-file-label {
+	white-space: nowrap;
+	overflow: hidden;
+}
+.break-spaces {
+	white-space: break-spaces;
+}
+.link-unstyled, .link-unstyled:link, .link-unstyled:hover {
+  color: inherit;
+  text-decoration: inherit;
+}
