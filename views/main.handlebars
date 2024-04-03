@@ -1,63 +1,63 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Notarize Me</title>
-    <link rel="stylesheet" href="/css/jass.css" />
-    <link rel="stylesheet" href="/css/style.css" />
-    <script src="https://cdn.tailwindcss.com"></script>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <title>Notarize Me</title>
+  <link rel="stylesheet" href="/css/jass.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
 
-  <body data-theme="dark">
-    <div id="root"></div> <!-- This is where React will mount your app -->
-    <div class="flex-column justify-space-around bg-white dark:bg-black" data-theme="dark">
-      <header class="display-flex justify-space-between align-center p-2">
-        <h1> </h1>
-      </header>
-      <main class="container container-fluid mt-5">{{{ body }}}</main>
-    </div>
+<body data-theme="dark">
+<div id="root"></div> <!-- This is where React will mount your app -->
+<div class="flex-column justify-space-around bg-white dark:bg-black" data-theme="dark">
+  <header class="display-flex justify-space-between align-center p-2">
+    <h1> </h1>
+  </header>
+  <main class="container container-fluid mt-5">{{{ body }}}</main>
+</div>
 
-    <!-- React and ReactDOM CDN -->
-    <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+<!-- React and ReactDOM CDN -->
+<script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
 
-    <!-- Your React component -->
-    <script type="module">
-      const { useState } = React;
+<!-- Your React component -->
+<script type="module">
+  const { useState } = React;
 
-      function App() {
-        const [darkMode, setDarkMode] = useState(false);
+  function App() {
+    const [darkMode, setDarkMode] = useState(false);
 
-        return (
-          <div className={`w-full md:h-screen ${darkMode ? 'dark' : ''}`}>
-            <div className="bg-gray-100 dark:bg-gray-900 dark:text-white">
-              <button onClick={() => setDarkMode(!darkMode)}>
-                {darkMode ? (
-                  <svg className="w-8 h-8 md:w-10 md:h-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
-                    />
-                  </svg>
-                ) : (
-                  <svg className="w-8 h-8 md:w-10 md:h-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
-                    />
-                  </svg>
-                )}
-              </button>
-            </div>
-          </div>
-        );
-      }
+    return (
+      <div className={`w-full md:h-screen ${darkMode ? 'dark' : ''}`}>
+        <div className="bg-gray-100 dark:bg-gray-900 dark:text-white">
+          <button onClick={() => setDarkMode(!darkMode)}>
+            {darkMode ? (
+              <svg className="w-8 h-8 md:w-10 md:h-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+                />
+              </svg>
+            ) : (
+              <svg className="w-8 h-8 md:w-10 md:h-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+                />
+              </svg>
+            )}
+          </button>
+        </div>
+      </div>
+    );
+  }
 
-      ReactDOM.render(<App />, document.getElementById('root'));
-    </script>
-  </body>
+  ReactDOM.render(<App />, document.getElementById('root'));
+</script>
+</body>
 </html>
