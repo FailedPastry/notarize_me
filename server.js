@@ -3,8 +3,9 @@ const express = require('express');
 const session = require('express-session');
 const exphbs = require('express-handlebars');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
-
-const routes = require('./controllers');
+const User = require('../models/User');
+const authController = require('./controllers/authController');
+const userController = require('./controllers/userController');
 const sequelize = require('./config/connection');
 const helpers = require('./utils/helpers');
 
@@ -33,7 +34,9 @@ const hbs = exphbs.create({ helpers });
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
-app.use(routes);
+// Include your controllers
+app.use('/auth', authController);
+app.use('/user', userController);
 
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () =>
