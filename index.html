@@ -9,28 +9,26 @@
 <body>
   <header>
     <img src="Logo-PNGs/NotarizeMe_Logo_1.png" alt="NotarizeMe Logo" class="logo">
-    <h1>NotarizeMe</h1>
-    <h2>Your Notary Solution</h2>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Forms</a></li>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+    <h1>Your Notary Solution</h1>
   </header>
-
-  <nav>
-    <ul>
-      <li><a href="#">Home</a></li>
-      <li><a href="#">Forms</a></li>
-      <li><a href="#">About Us</a></li>
-      <li><a href="#">Contact</a></li>
-    </ul>
-  </nav>
-
   <main>
-    <p>Skip the trip! Sign and notarize documents online with NotarizeMe.
-      Get documents signed securely, anytime, anywhere.
-    </p>
     <form>
       <h2>Document Information</h2>
       <label for="documentName">Document Name:</label><br>
       <input type="text" id="documentName" name="documentName" required><br><br>
       
+      <h2>Document</h2>
+      <label for="document">Upload Document:</label><br>
+      <input type="file" id="document" name="document" required><br><br>
+    
       <h2>Signer Information</h2>
       <label for="firstName">Signer First Name:</label><br>
       <input type="text" id="firstName" name="firstName" required><br><br>
@@ -50,6 +48,9 @@
   </main>
 
   <footer>
+    <p>Skip the trip! Sign and notarize documents online with NotarizeMe.
+      Get documents signed securely, anytime, anywhere.
+    </p>
     <p>&copy; 2024 NotarizeMe. All Rights Reserved.</p>
   </footer>
   <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
@@ -65,14 +66,15 @@
         signaturePad.clear();
       }
 
-      // Submit form button click handler (optional, modify as needed)
-      const submitButton = document.querySelector('button[type="submit"]');
-      submitButton.addEventListener('click', () => {
+      // Add event listener to the form submit event
+      document.getElementById('uploadForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent default form submission
+
         // Get the signature data as encoded string
         const signatureData = signaturePad.toDataURL();
         console.log("Signature data:", signatureData);
 
-        // You can send the signatureData to your server for further processing
+        uploadDocument(event, this);
       });
     } else {
       console.error("signature.js not found.");

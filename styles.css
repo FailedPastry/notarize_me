@@ -5,26 +5,27 @@ body {
 }
 
 header {
-  text-align: left;
-  padding: 10px;
+  text-align: center;
 }
 
 .logo {
   width: 250px; 
   height: auto; 
-  position: absolute;
-  top: 10px;
-  left: 10px;
+  margin: 0 auto;
+
 }
 
 nav {
+  width: 100%;
   text-align: center;
   padding: 10px;
+  background: linear-gradient(to left, #111531, #668cc2, #111531);
 }
 
 nav ul {
   list-style-type: none;
   padding: 0;
+  margin: 0 auto;
 }
 
 nav ul li {
@@ -39,26 +40,64 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-  color: #7f7fff; /* Lighter blue on hover */
+  color: #7f7fff; 
 }
 
 main {
-  padding: 10px;
-}
-
-main p {
-  max-width: 500px;
-  margin: 0;
-  /* Optional: Center align the text */
-  text-align: left;
+  padding: 5px;
 }
 
 footer {
-  text-align: left;
-  padding: 10px;
+  display:inline;
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 20%;
+  margin: 0 auto;
+  background-color: #45628a;
+  border: 1px solid black;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+form h2 {
+  margin-top: 0;
 }
 
 canvas {
-  background-color: white; /* Background color for the signature box */
+  background-color: white;
+  border: 1px solid black;
+  margin: 10px auto;
+  width: 100%;
+}
+
+label {
+  display: block;
+  margin-bottom: 1px;
+}
+
+input[type="text"],
+input[type="email"] {
+  width: 95%;
+  padding: 5px;
+  margin-top: 5px;
+}
+button {
+  padding: 10px 20px;
+  margin-right: 10px;
+  background-color: #383e6d;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #668Cc2;
 }
 
