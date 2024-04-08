@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Main Page</title>
-    <base href=".">
 
-    <!-- Bootstrap core CSS -->
-    <link href="./Main Page_files/bootstrap.min.css" rel="stylesheet">
-    <link href="./Main Page_files/bootstrap-toggle.min.css" rel="stylesheet">
-    <link href="./Main Page_files/bootstrap-toggle.b4fix.css" rel="stylesheet">
-    <link href="./Main Page_files/fontawesome-all.min.css" rel="stylesheet">
-    <link href="./Main Page_files/open-iconic-bootstrap.min.css" rel="stylesheet">
-    <link href="./Main Page_files/styles.css" rel="stylesheet">
-    <link type="text/css" href="./Main Page_files/journal.css" rel="stylesheet">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notarize Me</title>
+  <link rel="stylesheet" type="text/css" href="/css/jass.css">
+  <link rel="stylesheet" type="text/css" href="/css/style.css">
+  <link href="../public/css/tailwind.config.js" rel="stylesheet">
+   {{!-- <script src="https://cdn.tailwindcss.com"></script>  --}}
+  <script src="path/to/react.js"></script>
+  <script src="path/to/react-dom.js"></script>
 </head>
+
+
+  <div class="bg-white dark:bg-slate-800 rounded-lg px-6 py-8 ring-1 ring-slate-900/5 shadow-xl">
 <body class="bg-light">
     <nav class="navbar navbar-expand-lg navbar-dark bg-danger ">
         <div class="container d-block">
@@ -34,7 +34,7 @@
                     </span>
                 </div>
                 <div class="float-right">
-                    <img src="{{profilePicture}}" class="rounded-circle profile-image-topbar mr-3" onerror="">
+                    <img src="{{profilePicture}}" class="rounded-circle profile-image-topbar mr-3" onerror="this.src='';">
                 </div>
             </div>
             <div class="d-lg-none">
@@ -121,4 +121,5 @@
 
     </script>
 </body>
+
 </html>
