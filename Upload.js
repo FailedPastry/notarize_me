@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
-const cors = require('cors'); 
-const fileUpload = require('express-fileupload'); 
+const cors = require('cors');
+const fileUpload = require('express-fileupload');
 
 const filesPayloadExists = require('./middleware/filesPayloadExists');
 const fileExtLimiter = require('./middleware/fileExtLimiter');
@@ -10,35 +10,46 @@ const fileSizeLimiter = require('./middleware/filesSizeLimiter');
 const PORT = process.env.PORT || 8000;
 const app = express();
 
-const allowedOrigins = ['http://localhost:8000'];
+// Allow CORS requests from localhost for development purposes
+const allowedOrigins = ['http://localhost:*'];
 
 app.use(cors({
-  origin: 'http://localhost:8000',
-  methods: ['POST'] 
+  origin: allowedOrigins,
+  methods: ['POST'],
 }));
+
+app.options('*', cors());
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-app.post('/upload', 
+app.post('/upload',
   fileUpload({ createParentPath: true }),
   filesPayloadExists,
   fileExtLimiter(['.png', '.jpg', '.jpeg']),
   fileSizeLimiter,
-  (req, res) => {
-    const files = req.files
-    console.log(files)
+  async (req, res) => {
+    try {
+      const files = req.files;
+      console.log(files);
 
-    Object.keys(files).forEach(key => {
-      const filepath = path.join(__dirname, 'files', files[key].name)
-      files[key].mv(filepath, (err) => {
-        if (err) return res.status(500).json({ status: "error", message: err })
-    })
-})
+      // Handle file movement with Promises.all
+      const movePromises = [];
+      Object.keys(files).forEach(key => {
+        const filepath = path.join(__dirname, 'files', files[key].name);
+        movePromises.push(files[key].mv(filepath));
+      });
 
-return res.json({ status: 'success', message: Object.keys(files).toString() })
-});
+      await Promise.all(movePromises);
+
+      // Send success response if all files move successfully
+      return res.json({ status: 'success', message: Object.keys(files).toString() });
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({ status: "error", message: err });
+    }
+  });
+
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-

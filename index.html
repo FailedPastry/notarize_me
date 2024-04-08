@@ -17,7 +17,7 @@
         <li><a href="#">Contact</a></li>
       </ul>
     </nav>
-    <h1>Your Notary Solution</h1>
+    <h1>Upload the Document You Would Like to Notarize</h1>
   </header>
   <main>
     <form id="uploadForm" enctype="multipart/form-data">
@@ -48,6 +48,7 @@
           form.addEventListener('submit', (e) => {
             e.preventDefault()
             sendFiles()
+            
           })
       </script>
 
@@ -61,9 +62,12 @@
       <h2>Signature</h2>
       <label for="signature">Please sign below:</label><br>
       <canvas id="signature-box"></canvas><br>
-      <button type="button" onclick="clearSignature()">Clear Signature</button>
-      <button type="submit">Submit Form</button>
-    </form>
+
+      <div class="button-container">  
+        <button type="submit">Submit Form</button>
+        <button type="button" onclick="clearSignature()">Clear Signature</button>
+        </div>
+      </form>
   </main>
   <footer>
     <p>Skip the trip! Sign and notarize documents online with NotarizeMe.
