@@ -9,18 +9,31 @@ if (typeof SignaturePad !== "undefined") {
     signaturePad.clear();
   }
 
-  // Submit form button click handler (optional, modify as needed)
-  const submitButton = document.querySelector('button[type="submit"]');
-  submitButton.addEventListener('click', () => {
+  // Add event listener to the form submit event
+  document.getElementById('uploadForm').addEventListener('submit', async (event) => {
+    event.preventDefault(); // Prevent default form submission
+
     // Get the signature data as a base64 encoded string
     const signatureData = signaturePad.toDataURL();
     console.log("Signature data:", signatureData);
 
-    // You can send the signatureData to your server for further processing
-    // (e.g., store it in a database)
+    // Upload signature data to the server
+    try {
+      const response = await fetch('http://localhost:8000/upload', {
+        method: 'POST',
+        body: JSON.stringify({ signature: signatureData }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
 
-    // Prevent default form submission if needed
-    // event.preventDefault();
+      const data = await response.json();
+      console.log("Upload response:", data);
+      
+      // Handle response from the server as needed
+    } catch (error) {
+      console.error("Error uploading signature:", error);
+    }
   });
 } else {
   console.error("signature.js not found.");

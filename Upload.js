@@ -1,26 +1,44 @@
 const express = require('express');
-const multer = require('multer');
+const path = require('path');
+const cors = require('cors'); 
+const fileUpload = require('express-fileupload'); 
 
+const filesPayloadExists = require('./middleware/filesPayloadExists');
+const fileExtLimiter = require('./middleware/fileExtLimiter');
+const fileSizeLimiter = require('./middleware/filesSizeLimiter');
+
+const PORT = process.env.PORT || 8000;
 const app = express();
 
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-      cb(null, 'uploads/');
-    },
-    filename: (req, file, cb) => {
-      cb(null, Date.now() + '-' + file.originalname);
-    }
-  });
+const allowedOrigins = ['http://localhost:8000'];
 
-  const upload = multer({ storage });
+app.use(cors({
+  origin: 'http://localhost:8000',
+  methods: ['POST'] 
+}));
 
-  app.post('/upload-document', upload.single('document'), (req, res) => {
-    if (req.file) {
-      console.log("Document uploaded:", req.file.filename);
-      res.json({ message: "Document uploaded successfully!" });
-    } else {
-      res.status(400).json({ message: "Error uploading document!" });
-    }
-  });
-  const port = process.env.PORT || 3002;
-app.listen(port, () => console.log(`Server listening on port ${port}`));
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+app.post('/upload', 
+  fileUpload({ createParentPath: true }),
+  filesPayloadExists,
+  fileExtLimiter(['.png', '.jpg', '.jpeg']),
+  fileSizeLimiter,
+  (req, res) => {
+    const files = req.files
+    console.log(files)
+
+    Object.keys(files).forEach(key => {
+      const filepath = path.join(__dirname, 'files', files[key].name)
+      files[key].mv(filepath, (err) => {
+        if (err) return res.status(500).json({ status: "error", message: err })
+    })
+})
+
+return res.json({ status: 'success', message: Object.keys(files).toString() })
+});
+
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
