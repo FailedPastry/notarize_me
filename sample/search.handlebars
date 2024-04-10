@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Search Notary Acts</title>
+    <title>Search Notrize Me</title>
     <base href=".">
     <!-- Bootstrap core CSS -->
     <link href="./Search Notary Acts_files/bootstrap.min.css" rel="stylesheet">
@@ -23,16 +23,17 @@
         <a class="navbar-brand ml-2" href="https://login.notaryact.com/#">Notaryact</a>
         <div class="float-right text-white d-none d-sm-block">
             <div class="float-right">
-                <span class="font-weight-bold">albert terrazas</span><br>
-                <span>account cancelling</span>
+                <span class="font-weight-bold">{{username}}</span><br>
+                <span>{{accountStatus}}</span>
             </div>
             <div class="float-right">
-                <img src="./Search Notary Acts_files/default_profile_picture.png" class="rounded-circle profile-image-topbar mr-3" onerror="this.src='/media/images/default_profile_picture.png';">
+                <img src="{{profilePicture}}" class="rounded-circle profile-image-topbar mr-3" onerror="this.src='';">
             </div>
         </div>
         <div class="d-lg-none">
             <div class="collapse navbar-collapse" id="navbarsExampleDefault">
                 <ul class="navbar-nav mr-auto">
+                    {{#each menuItems}}
                     <li class="nav-item h4 menu6">
                         <a class="nav-link text-light" href="https://login.notaryact.com/search.html">
                             <svg viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="text-white svg-icon">
