@@ -1,47 +1,68 @@
-const path = require('path');
 const express = require('express');
 const session = require('express-session');
+const path = require('path');
 const exphbs = require('express-handlebars');
-const SequelizeStore = require('connect-session-sequelize')(session.Store);
-const User = require('../models/User');
-const authController = require('./controllers/authController');
-const userController = require('./controllers/userController');
-const sequelize = require('./config/connection');
-const helpers = require('./utils/helpers');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
-
 const sess = {
-  secret: 'Super secret secret',
+  secret: process.env.SESSION_SECRET || 'Super secret secret',
   cookie: {},
   resave: false,
   saveUninitialized: true,
-  store: new SequelizeStore({
-    db: sequelize,
-  }),
 };
 
 app.use(session(sess));
 
-// Handlebars setup
-const hbs = exphbs.create({ helpers });
+// Create an instance of express-handlebars
+const hbs = exphbs.create({
+  defaultLayout: 'main',
+  partialsDir: path.join(__dirname, 'views', 'partials') // Define the partials directory
+});
 
+// Set Handlebars as the view engine
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
-// Include your controllers
-app.use('/auth', authController);
-app.use('/user', userController);
+// Middleware to serve static files
+app.use(express.static(path.join(__dirname, 'public')));
 
-sequelize.sync({ force: false }).then(() => {
-  app.listen(PORT, () =>
-    console.log(
-      `\nServer running on port ${PORT}. Visit http://localhost:${PORT} and create an account!`
-    )
-  );
+// Check if the user is authenticated
+function isAuthenticated(req) {
+  return req.session.authenticated;
+}
+
+// Route to render the main HTML page
+// app.get('/', (req, res) => {
+//   if (isAuthenticated(req)) {
+//     res.render('layouts/main'); // Render the main section if authenticated
+//   } else {
+//     res.render('login'); // Render the login page if not authenticated
+//   }
+// });
+
+// // Route for user login
+// app.post('/login', (req, res) => {
+//   // Perform authentication logic here
+//   // For example, check credentials and set session variables
+//   req.session.authenticated = true;
+//   res.redirect('/');
+// });
+
+// // Route for user logout
+// app.get('/logout', (req, res) => {
+//   req.session.authenticated = false;
+//   res.redirect('/');
+// });
+//Route to render the main HTML page
+app.get('/', (req, res) => {
+  res.render('layouts/main'); // Update the path to match your actual file structure
+});
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}.`);
 });

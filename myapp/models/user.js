@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('./sequelize'); // The path to your sequelize.js file
+const sequelize = require('../../sequelize'); // Update the path to correctly require the sequelize instance
 
 const User = sequelize.define('User', {
   // Define attributes
@@ -15,7 +15,7 @@ const User = sequelize.define('User', {
 }, {
   // Model options
   tableName: 'users',
-  timestamps: false,
+  timestamps: true, // If you want timestamps (createdAt and updatedAt) managed by Sequelize
 });
 
 module.exports = User;

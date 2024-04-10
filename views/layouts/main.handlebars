@@ -1,60 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" class="dark">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Notarize Me</title>
-  <link rel="stylesheet" type="text/css" href="/css/jass.css">
-  <link rel="stylesheet" type="text/css" href="/css/style.css">
-  <link href="../public/css/tailwind.config.js" rel="stylesheet">
-   {{!-- <script src="https://cdn.tailwindcss.com"></script>  --}}
-  <script src="path/to/react.js"></script>
-  <script src="path/to/react-dom.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notarize Me</title>
+    <link rel="stylesheet" type="text/css" href="/css/jass.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <!-- Add correct path to tailwind.config.js or remove if unnecessary -->
+    <link href="../public/css/tailwind.config.js" rel="stylesheet">
+    <!-- Add correct paths or CDN links for React scripts -->
+    <script src="path/to/react.js"></script>
+    <script src="path/to/react-dom.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .dark-mode {
+            background-color: #141F6D;
+            color: #668CC2;
+        }
+    </style>
 </head>
+<body class="bg-white text-#B6B9CE dark-mode">
+    <button id="toggleDarkMode">X</button>
 
+    <script>
+        const toggleDarkModeBtn = document.getElementById('toggleDarkMode');
+        const body = document.body;
 
-  <div class="bg-white dark:bg-slate-800 rounded-lg px-6 py-8 ring-1 ring-slate-900/5 shadow-xl">
-<body class="bg-light">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-danger ">
+        toggleDarkModeBtn.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+        });
+    </script>
+    <!-- start of main nav bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
         <div class="container d-block">
-            <button class="navbar-toggler mb-3" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <a class="navbar-brand ml-2" href="https://">
-                Notarize Me
-            </a>
-            <div class="float-right text-white d-none d-sm-block">
-                <div class="float-right">
-                    <span class="font-weight-bold">
-                        {{username}}
-                    </span><br>
-                    <span>
-                        {{accountStatus}}
-                    </span>
-                </div>
-                <div class="float-right">
-                    <img src="{{profilePicture}}" class="rounded-circle profile-image-topbar mr-3" onerror="this.src='';">
-                </div>
-            </div>
-            <div class="d-lg-none">
-                <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-                    <ul class="navbar-nav mr-auto">
-                        {{#each menuItems}}
-                        <li class="nav-item h4 {{menuClass}}">
-                            <a class="nav-link text-light" href="{{url}}">
-                                <svg viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="text-white svg-icon">
-                                    {{svgPath}}
-                                </svg> {{menuItemText}}
-                            </a>
-                        </li>
-                        {{/each}}
-                    </ul>
-                </div>
-            </div>
+            <!-- Navbar content -->
         </div>
     </nav>
-
+    <!-- end of main navigation bar -->
+    <nav>
+        <button class="btn" id="logout">logout</button>
+        <a class="navbar-brand ml-2" href="https://">Notarize Me</a>
+    </nav>
+    
+    <!-- Include the login card partial -->
+    {{#if isAuthenticated}}
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Main Section</h5>
+            <div id="main-section">
+                <!-- Main section content goes here -->
+            </div>
+            <p class="card-text">Welcome to the main section</p>
+        </div>
+    </div>
+    {{else}}
+    <div class="card">
+        <div class="card-body">
+            <button class="btn" id="login">
+            <h5 class="card-title">Login</h5>
+            </button>
+            <div id="login-card">Please log in to access the main section</div>
+            <p class="card-text">Login to your account</p>
+        </div>
+    </div>
+    {{/if}}
+    
+    <!-- aside hidden nav buttons -->
+    <!-- Include other content here -->
+    
+    <!-- end of main navigation bar -->
+    {{!-- aside hidden nav buttons --}}
+    
     <main role="main" class="container mt-3 mb-3">
         <div class="row">
             <div class="col-lg-3">
@@ -70,56 +86,18 @@
                     {{/each}}
                 </ul>
             </div>
-            <div class="col-lg-9">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card shadow border-0 rounded">
-                            <div class="card-header d-none d-xs-none d-sm-none d-md-block p-0">
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item border-0">
-                                        <div class="row d-md-block my-0 pl-4">
-                                            <div class="col-md-2 text-secondary d-inline-block pl-2">
-                                                Entry
-                                            </div>
-                                            <div class="col-md-2 text-secondary d-inline-block p-0">
-                                                Date
-                                            </div>
-                                            <div class="col-md-3 text-secondary d-inline-block p-0">
-                                                Type
-                                            </div>
-                                            <div class="col-md-3 text-secondary d-inline-block p-0">
-                                                Individual
-                                            </div>
-                                            <div class="col-md-1 text-secondary d-inline-block p-0">
-                                                Details
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
+            {{editdraft}}
+            <!-- main display page -->
+           
                             <div class="card-body pt-0">
                                 <ul class="list-group list-group-flush">
                                     <div class="row mt-3 ml-3">
-                                        <div class="col-12">
-                                            {{noDataMessage}}
+                                        <div class
+
+
                                         </div>
-                                    </div>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
     </main>
-
-    <!-- Bootstrap core JavaScript -->
-    <script src="./Main Page_files/bootstrap.min.js.download"></script>
-    <script src="./Main Page_files/bootstrap-toggle.min.js.download"></script>
-    <script src="./Main Page_files/jquery.ui.touch-punch.min.js.download"></script>
-    <script type="text/javascript">
-
-    </script>
 </body>
 
 </html>

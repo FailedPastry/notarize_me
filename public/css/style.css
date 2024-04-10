@@ -3,14 +3,7 @@
 @tailwind utilities;
 
 
-:root {
-    --primary-color: rgb(82, 80, 144);
-    --secondary-color: #536390;
-    --font-color: #424242;
-    --bg-color: #fff;
-    --heading-color: #292922;
-    --color: black;
-  }
+
   [data-theme="dark"] {
     --primary-color: rgb(107, 106, 134);
     --secondary-color: #818cab;
@@ -19,3 +12,30 @@
     --heading-color: #63656d;
     --color: white; 
   }
+
+  // tailwind.config.js
+
+module.exports = {
+  darkMode: 'class', // Enable dark mode
+  // Other Tailwind CSS configurations...
+};
+
+notarize_me/
+  |- server.js
+  |- views/
+  |   |- layouts/
+  |   |   |- main.handlebars
+  |   |- partials/
+  |   |   |- header.handlebars
+  |   |   |- footer.handlebars
+  |   |- main.handlebars
+  |- public/
+      |- css/
+      |- js/
+      |- images/
+
+      dark.handlebars { 
+        background: black; background
+        color: white; color
+      
+      }
