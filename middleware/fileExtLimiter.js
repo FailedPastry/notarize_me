@@ -21,4 +21,6 @@ const fileExtLimiter = (allowedExtArray) => {
     };
 };
 
-module.exports = fileExtLimiter;
+module.exports = fileExtLimiter
+
+

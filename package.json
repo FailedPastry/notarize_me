@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node upload.js",
-    "dev": "nodemon"
+    "watch": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",

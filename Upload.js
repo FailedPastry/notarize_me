@@ -10,19 +10,33 @@ const fileSizeLimiter = require('./middleware/filesSizeLimiter');
 const PORT = process.env.PORT || 8000;
 const app = express();
 
-// Allow CORS requests from localhost for development purposes
-const allowedOrigins = ['http://localhost:*'];
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.use(cors({
-  origin: allowedOrigins,
-  methods: ['POST'],
-}));
+// Allow CORS requests from localhost for development purposes
+// const allowedOrigins = ['http://localhost:*'];
+
+// app.use(cors({
+//   origin: allowedOrigins,
+//   methods: ['POST', 'GET'],
+// }));
 
 app.options('*', cors());
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+/*app.get('/upload', (req, res) => {
+  res.json(repos);
 });
+*/
+
+app.get('/upload', (req, res) => {
+  res.send('This is the upload endpoint');
+});
+
+
+// app.get('/upload', (req, res) => {
+// res.sendFile(path.join(__dirname, 'index.html'));
+// }); 
+
 
 app.post('/upload',
   fileUpload({ createParentPath: true }),
@@ -32,7 +46,8 @@ app.post('/upload',
   async (req, res) => {
     try {
       const files = req.files;
-      console.log(files);
+      console.log(files.testing.name);
+      console.log(files.testing.size);
 
       // Handle file movement with Promises.all
       const movePromises = [];
