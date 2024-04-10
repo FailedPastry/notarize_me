@@ -34,7 +34,7 @@
             const myFile = document.getElementById('document').files[0]; // Select the file input by ID
             const formData = new FormData();
             formData.append(myFile.name, myFile);
-            const response = await fetch('http://localhost:8000/upload', {
+            const response = await fetch('http://localhost:3001/upload', {
               method: 'POST',
               body: formData
             });

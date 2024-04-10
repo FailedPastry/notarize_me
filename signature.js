@@ -19,7 +19,7 @@ if (typeof SignaturePad !== "undefined") {
 
     // Upload signature data to the server
     try {
-      const response = await fetch('http://localhost:8000/upload', {
+      const response = await fetch('http://localhost:3001/upload', {
         method: 'POST',
         body: JSON.stringify({ signature: signatureData }),
         headers: {

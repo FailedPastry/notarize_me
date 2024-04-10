@@ -7,19 +7,18 @@ const filesPayloadExists = require('./middleware/filesPayloadExists');
 const fileExtLimiter = require('./middleware/fileExtLimiter');
 const fileSizeLimiter = require('./middleware/filesSizeLimiter');
 
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 3001;
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Allow CORS requests from localhost for development purposes
-// const allowedOrigins = ['http://localhost:*'];
+ // Allow CORS requests from localhost for development purposes
+ const allowedOrigins = ['http://localhost:*'];
 
-// app.use(cors({
-//   origin: allowedOrigins,
-//   methods: ['POST', 'GET'],
-// }));
+ app.use(cors({
+   origin: allowedOrigins,
+ }));
 
 app.options('*', cors());
 
@@ -44,27 +43,28 @@ app.post('/upload',
   fileExtLimiter(['.png', '.jpg', '.jpeg']),
   fileSizeLimiter,
   async (req, res) => {
-    try {
-      const files = req.files;
-      console.log(files.testing.name);
-      console.log(files.testing.size);
+  try {
+    const files = req.files;
 
-      // Handle file movement with Promises.all
-      const movePromises = [];
-      Object.keys(files).forEach(key => {
+    const movePromises = [];
+    Object.keys(files).forEach(key => {
+      if (files[key]) {
         const filepath = path.join(__dirname, 'files', files[key].name);
         movePromises.push(files[key].mv(filepath));
-      });
+        console.log(files[key].name);
+        console.log(files[key].size);
+      }
+    });
 
-      await Promise.all(movePromises);
+    await Promise.all(movePromises);
 
-      // Send success response if all files move successfully
-      return res.json({ status: 'success', message: Object.keys(files).toString() });
-    } catch (err) {
-      console.error(err);
-      return res.status(500).json({ status: "error", message: err });
-    }
-  });
+    return res.json({ status: 'success', message: Object.keys(files).toString() });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ status: "error", message: err });
+  }
+});
+
 
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
