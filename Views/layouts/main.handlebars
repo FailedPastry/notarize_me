@@ -19,21 +19,18 @@
       .dark-mode { background-color: #141F6D; color: #668CC2; }
     </style>
   </head>
-    <img
-      src="/NotarizeMeLogo2.png"
-      alt="NotarizeMe Logo"
-      class="logo"
-    />
+    
 
   <body class="bg-white text-#B6B9CE dark-mode">
-    <button id="toggleDarkMode">X</button>
+    <button class="bg-white" id="toggleDarkMode">X</button>
 
     <script>
       const toggleDarkModeBtn = document.getElementById('toggleDarkMode'); const
       body = document.body; toggleDarkModeBtn.addEventListener('click', () => {
       body.classList.toggle('dark-mode'); });
     </script>
-    <!-- start of main nav bar -->
+{{!-- <-- start of main nav bar --> --}}
+     {{!-- <img src="/Views/public/images/Logo2.jpeg" alt="NotarizeMe Logo" class="logo" /> --}}
     <a
       class="navbar-brand ml-2 font-bold flex justify-center text-5xl"
       href="#"
@@ -48,6 +45,7 @@
       <button class="btn ml-2" id="logout">Logout</button>
     </nav>
     <!-- end of main navigation bar -->
+    
     <body>
       {{{body}}}
     </body>
