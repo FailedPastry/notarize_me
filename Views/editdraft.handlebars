@@ -1,0 +1,34 @@
+<main class="flex justify-center items-center h-screen">
+  <form id="uploadForm" enctype="multipart/form-data" class="max-w-md w-full">
+    <h2 class="text-2xl mb-4 mt-20 ">Document Information</h2>
+    <label for="documentName" class="block">Document Name:</label>
+    <input type="text" id="documentName" name="documentName" required class="w-full border border-gray-300 rounded-md px-3 py-2 mb-4">
+
+    <h2 class="text-2xl mb-4">Document</h2>
+    <label for="document" class="block">Upload Document:</label>
+    <input type="file" id="document" accept="image/*" name="document" required class="w-full border border-gray-300 rounded-md px-3 py-2 mb-4">
+
+    <h2 class="text-2xl mb-4">Signer Information</h2>
+    <label for="firstName" class="block">Signer First Name:</label>
+    <input type="text" id="firstName" name="firstName" required class="w-full border border-gray-300 rounded-md px-3 py-2 mb-4">
+    
+    <label for="lastName" class="block">Signer Last Name:</label>
+    <input type="text" id="lastName" name="lastName" required class="w-full border border-gray-300 rounded-md px-3 py-2 mb-4">
+    
+    <label for="email" class="block">Signer Email:</label>
+    <input type="email" id="email" name="email" required class="w-full border border-gray-300 rounded-md px-3 py-2 mb-4">
+
+    <h2 class="text-2xl mb-4">Signature</h2>
+    <label for="signature" class="block">Please sign below:</label>
+    <canvas id="signature-box" class="border border-gray-300 rounded-md mb-4"></canvas>
+
+    <div class="flex justify-between">
+      <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Submit Form</button>
+      <button type="button" onclick="clearSignature()" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Clear Signature</button>
+    </div>
+  </form>
+</main>
+<footer class="text-center mt-8">
+  <p>Skip the trip! Sign and notarize documents online with NotarizeMe. Get documents signed securely, anytime, anywhere.</p>
+  <p>&copy; 2024 NotarizeMe. All Rights Reserved.</p>
+</footer>

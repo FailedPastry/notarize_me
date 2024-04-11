@@ -1,0 +1,76 @@
+<form id="uploadForm" enctype="multipart/form-data">
+      <h2>Document Information</h2>
+      <label for="documentName">Document Name:</label><br>
+      <input type="text" id="documentName" name="documentName" required><br><br>
+      <h2>Document</h2>
+      <label for="document">Upload Document:</label><br>
+      
+      <input type="file" id="document" accept="image/*" name="document" required><br><br>
+      <script>
+          const form = document.getElementById('uploadForm')
+          const sendFiles = async () => {
+            const myFile = document.getElementById('document').files[0]; // Select the file input by ID
+            const formData = new FormData();
+            formData.append(myFile.name, myFile);
+            const response = await fetch('http://localhost:3001/upload', {
+              method: 'POST',
+              body: formData
+            });
+            const json = await response.json();
+            const h2 = document.querySelector('h2')
+            h2.textContent = `Status: ${json?.status}`
+            const h3 = document.querySelector('h3')
+            h3.textContent = json?.message
+            console.log(json)
+          }
+          form.addEventListener('submit', (e) => {
+            e.preventDefault()
+            sendFiles()
+            
+          })
+      </script>
+
+      <h2>Signer Information</h2>
+      <label for="firstName">Signer First Name:</label><br>
+      <input type="text" id="firstName" name="firstName" required><br><br>
+      <label for="lastName">Signer Last Name:</label><br>
+      <input type="text" id="lastName" name="lastName" required><br><br>
+      <label for="email">Signer Email:</label><br>
+      <input type="email" id="email" name="email" required><br><br>
+      <h2>Signature</h2>
+      <label for="signature">Please sign below:</label><br>
+      <canvas id="signature-box"></canvas><br>
+
+      <div class="button-container">  
+        <button type="submit">Submit Form</button>
+        <button type="button" onclick="clearSignature()">Clear Signature</button>
+        </div>
+      </form>
+  </main>
+  <footer>
+    <p>Skip the trip! Sign and notarize documents online with NotarizeMe.
+      Get documents signed securely, anytime, anywhere.
+    </p>
+    <p>&copy; 2024 NotarizeMe. All Rights Reserved.</p>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
+  <script>
+    const canvas = document.getElementById('signature-box');
+    // Check if signaturePad is available (from signature.js)
+    if (typeof SignaturePad !== "undefined") {
+      const signaturePad = new SignaturePad(canvas);
+      // Function to clear the signature
+      function clearSignature() {
+        signaturePad.clear();
+      }
+      // Add event listener to the form submit event
+      document.getElementById('uploadForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent default form submission
+        // Get the signature data as encoded string
+        const signatureData = signaturePad.toDataURL();
+        console.log("Signature data:", signatureData);
+      });
+    } else {
+      console.error("signature.js not found.");
+    }
+  </script>

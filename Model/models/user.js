@@ -1,8 +1,10 @@
 // models/User.js
 
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database'); 
-// Define the User model
+const { DataTypes, Sequelize } = require('sequelize');
+const sequelize = new Sequelize('database', 'username', 'password', {
+  host: 'localhost',
+  dialect: 'postgres' // Specify the dialect you are using (e.g., 'mysql', 'postgres')
+});// Define the User model
 const User = sequelize.define('User', {
  
   id: {
