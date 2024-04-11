@@ -36,12 +36,16 @@ function isAuthenticated(req) {
 
 // Route to render the main HTML page
 app.get('/', (req, res) => {
-  if (isAuthenticated(req)) {
-    res.render('editdraft'); // Render the editdraft partial if authenticated
-  } else {
-    res.render('home'); // Render the home view if not authenticated
-  }
+  res.render('editdraft'); // Render the editdraft partial
 });
+
+// app.get('/', (req, res) => {
+//    {
+//     res.render('editdraft'); // Render the editdraft partial if authenticated
+//   } else {
+//     res.render('home'); // Render the home view if not authenticated
+//   }
+// });
 
 
 // Route for user login
