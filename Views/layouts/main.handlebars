@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Notarize Me</title>
-    <link rel="stylesheet" type="text/css" href="/Views/public/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
 
     <link
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
@@ -16,7 +16,7 @@
       rel="stylesheet"
     />
     <style>
-      .dark-mode { background-color: #141F6D; color: #668CC2; }
+      .dark-mode { background-color: #111531; color: #668CC2; }
     </style>
   </head>
     
@@ -30,17 +30,17 @@
       body.classList.toggle('dark-mode'); });
     </script>
 {{!-- <-- start of main nav bar --> --}}
-     {{!-- <img src="/Views/public/images/Logo2.jpeg" alt="NotarizeMe Logo" class="logo" /> --}}
+     <img src="/images/Logo2.jpeg" alt="NotarizeMe Logo" class="logo" />
     <a
-      class="navbar-brand ml-2 font-bold flex justify-center text-5xl"
-      href="#"
+      class="navbar-brand ml-2 font-bold flex justify-center text-5xl "
+      
     >Notarize Me</a>
     <nav class="flex justify-center items-center bg-danger py-4">
       <ul class="flex space-x-4">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Forms</a></li>
-        <li><a href="#">About Us</a></li>
-        <li><a href="#">Contact</a></li>
+        <li><a href="/">Home |</a></li>
+        <li><a href="#">Search |</a></li>
+        <li><a href="#">Journal |</a></li>
+        <li><a href="#">Report |</a></li>
       </ul>
       <button class="btn ml-2" id="logout">Logout</button>
     </nav>
