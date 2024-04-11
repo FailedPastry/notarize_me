@@ -8,8 +8,6 @@ Welcome to Notarize Me, a secure and convenient online platform that allows you 
 - Digital Signature Capability: Sign your documents electronically with our secure digital signature feature.
 - Streamlined Process: Our intuitive platform guides you through the notarization process step-by-step.
 
-## Screenshots
-
 ## User Story
 As a user, I want to: 
 - Upload my documents easily in various formats so I can get them notarized online.
@@ -17,11 +15,17 @@ As a user, I want to:
 - I want a clear and guided online experience to complete the notarization process efficiently.
 
 ## Technologies Used
+- MSQL
+- Node.js
+- Insomnia
+- Heroku 
 - Secure Login Page
 - DocuSign Digital Signature
 - File Uploader
 
 ## API's
+- Signature capture
+- File Uploader
 
 ## Contributers
 - Albert Terrazas
