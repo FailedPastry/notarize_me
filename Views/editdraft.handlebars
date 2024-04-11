@@ -1,4 +1,4 @@
-<main class="flex justify-center items-center h-screen mb-20 mt-20">
+<main class="flex justify-center items-center h-screen mb-20 mt-10">
   <form id="uploadForm" enctype="multipart/form-data" class="max-w-md w-full">
     <h2 class="text-2xl mb-4 mt-20 ">Document Information</h2>
     <label for="documentName" class="block">Document Name:</label>
@@ -29,6 +29,29 @@
   </form>
 </main>
 <footer class="text-center mt-8">
+  <P> </P>
+  <P> </P>
   <p>Skip the trip! Sign and notarize documents online with NotarizeMe. Get documents signed securely, anytime, anywhere.</p>
   <p>&copy; 2024 NotarizeMe. All Rights Reserved.</p>
 </footer>
+<script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
+  <script>
+    const canvas = document.getElementById('signature-box');
+    // Check if signaturePad is available (from signature.js)
+    if (typeof SignaturePad !== "undefined") {
+      const signaturePad = new SignaturePad(canvas);
+      // Function to clear the signature
+      function clearSignature() {
+        signaturePad.clear();
+      }
+      // Add event listener to the form submit event
+      document.getElementById('uploadForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent default form submission
+        // Get the signature data as encoded string
+        const signatureData = signaturePad.toDataURL();
+        console.log("Signature data:", signatureData);
+      });
+    } else {
+      console.error("signature.js not found.");
+    }
+  </script>
