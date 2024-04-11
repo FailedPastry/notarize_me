@@ -3,6 +3,14 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Notarize Me</title>
+    <link rel="stylesheet" type="text/css" href="/Views/public/css/style.css" />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <script src="path/to/react.js"></script>
+    <script src="path/to/react-dom.js"></script>
     <link
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
       rel="stylesheet"
@@ -10,12 +18,12 @@
     <style>
       .dark-mode { background-color: #141F6D; color: #668CC2; }
     </style>
-    <img
-      src="Logo-PNGs/NotarizeMe_Logo_1.png"
-      alt="NotarizeMe Logo"
-      class="logo"
-    />
   </head>
+  <img
+    src="https://www.shutterstock.com/image-photo/black-rowan-berries-on-branches-red-159086927"
+    alt="NotarizeMe Logo"
+    class="logo"
+  />
 
   <body class="bg-white text-#B6B9CE dark-mode">
     <button id="toggleDarkMode">X</button>
@@ -26,8 +34,11 @@
       body.classList.toggle('dark-mode'); });
     </script>
     <!-- start of main nav bar -->
+    <a
+      class="navbar-brand ml-2 font-bold flex justify-center text-5xl"
+      href="#"
+    >Notarize Me</a>
     <nav class="flex justify-center items-center bg-danger py-4">
-      <a class="navbar-brand ml-2 font-bold" href="#">Notarize Me</a>
       <ul class="flex space-x-4">
         <li><a href="#">Home</a></li>
         <li><a href="#">Forms</a></li>
