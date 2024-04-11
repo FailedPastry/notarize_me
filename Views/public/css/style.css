@@ -3,14 +3,7 @@
 @tailwind utilities;
 
 
-:root {
-    --primary-color: rgb(82, 80, 144);
-    --secondary-color: #536390;
-    --font-color: #424242;
-    --bg-color: #fff;
-    --heading-color: #292922;
-    --color: black;
-  }
+  
   [data-theme="dark"] {
     --primary-color: rgb(107, 106, 134);
     --secondary-color: #818cab;
