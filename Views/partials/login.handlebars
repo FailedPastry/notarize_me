@@ -5,22 +5,54 @@
       <div class="form-group">
         <label for="email-login">Email:</label>
       </div>
-        <input class="form-input" type="text" id="email-login" />
+      <input class="form-input" type="text" id="email-login" />
       <div class="form-group">
         <label for="password-login">Password:</label>
       </div>
-        <input class="form-input" type="password" id="password-login" />
+      <input class="form-input" type="password" id="password-login" />
       <div class="form-group">
         <button class="btn btn-primary" type="submit">login</button>
       </div>
     </form>
   </div>
   <div class="row justify-content-center">
-                        <div class="col-12 mt-3 mb-3">
-                            <div class="footer text-center">
-                                <p class="text-center"><small><a href="" class="text-dark font-weight-bold">Forgot Password?</a></small></p>
-<p class="text-muted"><small>Don't have an account? <a href="/create" class="text-danger font-weight-bold">Create New Account</a></small></p>
-                            </div>
-
-  
+    <div class="col-12 mt-3 mb-3">
+      <div class="footer text-center">
+        <p class="text-center"><small><a href="" class="text-dark font-weight-bold">Forgot Password?</a></small></p>
+        <p class="text-muted"><small>Don't have an account? <a href="/create" class="text-danger font-weight-bold">Create New Account</a></small></p>
+      </div>
+    </div>
+  </div>
 </div>
+
+<script>
+  const loginForm = document.querySelector('.login-form');
+
+  loginForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const email = document.getElementById('email-login').value;
+    const password = document.getElementById('password-login').value;
+
+    try {
+      const response = await fetch('/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, password })
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        localStorage.setItem('token', data.token);
+        // Redirect to dashboard or other authenticated route
+      } else {
+        console.error(data.message);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  });
+</script>

@@ -32,7 +32,7 @@ const hbs = exphbs.create({
 });
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
-
+app.use(express.static('public'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Check if the user is authenticated
@@ -55,11 +55,33 @@ app.get('/', (req, res) => {
 
 
 // Route for user login
-app.post('/login', (req, res) => {
-  // Perform authentication logic here
-  // For example, check credentials and set session variables
-  req.session.authenticated = true;
-  res.redirect('/');
+app.post('/login', async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    // Find user by email
+    const user = await User.findOne({ email });
+
+    // Check if user exists
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Compare passwords
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordValid) {
+      return res.status(401).json({ message: 'Invalid password' });
+    }
+
+    // Generate JWT
+    const token = jwt.sign({ userId: user._id }, 'your-secret-key', { expiresIn: '1h' });
+
+    res.json({ token });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
 });
 
 // Route for user logout
