@@ -18,7 +18,9 @@
             color: #668CC2;
         }
     </style>
+    <img src="Logo-PNGs/NotarizeMe_Logo_1.png" alt="NotarizeMe Logo" class="logo">
 </head>
+
 <body class="bg-white text-#B6B9CE dark-mode">
     <button id="toggleDarkMode">X</button>
 
@@ -35,69 +37,20 @@
         <div class="container d-block">
             <!-- Navbar content -->
         </div>
-    </nav>
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Forms</a></li>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
     <!-- end of main navigation bar -->
-    <nav>
+    
         <button class="btn" id="logout">logout</button>
-        <a class="navbar-brand ml-2" href="https://">Notarize Me</a>
+        <a class="navbar-brand ml-2 font-bold" href="https://">Notarize Me</a>
     </nav>
+<body>
+ {{{body}}} 
     
-    <!-- Include the login card partial -->
-    {{#if isAuthenticated}}
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">Main Section</h5>
-            <div id="main-section">
-                <!-- Main section content goes here -->
-            </div>
-            <p class="card-text">Welcome to the main section</p>
-        </div>
-    </div>
-    {{else}}
-    <div class="card">
-        <div class="card-body">
-            <button class="btn" id="login">
-            <h5 class="card-title">Login</h5>
-            </button>
-            <div id="login-card">Please log in to access the main section</div>
-            <p class="card-text">Login to your account</p>
-        </div>
-    </div>
-    {{/if}}
-    
-    <!-- aside hidden nav buttons -->
-    <!-- Include other content here -->
-    
-    <!-- end of main navigation bar -->
-    {{!-- aside hidden nav buttons --}}
-    
-    <main role="main" class="container mt-3 mb-3">
-        <div class="row">
-            <div class="col-lg-3">
-                <ul class="nav nav-left flex-column card p-1 d-none d-lg-flex shadow-sm border-0">
-                    {{#each menuItems}}
-                    <li class="nav-item {{menuClass}}">
-                        <a class="nav-link h4" href="{{url}}">
-                            <svg id="{{svgId}}" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="text-danger svg-icon">
-                                {{svgPath}}
-                            </svg> {{menuItemText}}
-                        </a>
-                    </li>
-                    {{/each}}
-                </ul>
-            </div>
-            {{editdraft}}
-            <!-- main display page -->
-           
-                            <div class="card-body pt-0">
-                                <ul class="list-group list-group-flush">
-                                    <div class="row mt-3 ml-3">
-                                        <div class
-
-
-                                        </div>
-
-    </main>
 </body>
-
 </html>
+

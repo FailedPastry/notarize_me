@@ -39,3 +39,29 @@ notarize_me/
         color: white; color
       
       }
+
+
+      form {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 20%;
+        margin: 0 auto;
+        background-color: #45628a;
+        border: 1px solid black;
+        padding: 15px;
+        border-radius: 5px;
+      }
+      
+      form h2 {
+        margin-top: 0;
+      }
+      
+      canvas {
+        background-color: white;
+        border: 1px solid black;
+        margin: 10px auto;
+        width: 100%;
+      }
+      
