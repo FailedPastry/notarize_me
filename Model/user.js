@@ -1,6 +1,9 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('./sequelize'); // The path to your sequelize.js file
-
+const { DataTypes, Sequelize } = require('sequelize');
+const sequelize = new Sequelize('database', 'username', 'password', {
+  host: 'localhost',
+  dialect: 'postgres',
+  dialectModule: require('pg')
+});
 const User = sequelize.define('User', {
   // Define attributes
   username: {

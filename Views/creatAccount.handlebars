@@ -1,0 +1,54 @@
+<div class="sign-up">
+    <h2 class="page-title">Signup</h2>
+    <form class="form signup-form">
+      <div class="form-group">
+        <label for="username-signup">Username:</label>
+      </div>
+        <input class="form-input" type="text" id="username-signup" />
+      <div class="form-group">
+        <label for="email-signup">Email:</label>
+      </div>
+        <input class="form-input" type="text" id="email-signup" />
+      <div class="form-group">
+        <label for="password-signup">Password:</label>
+      </div>
+        <input class="form-input" type="password" id="password-signup" />
+      <div class="form-group">
+        <button class="btn btn-primary" type="submit">signup</button>
+        <script>
+document.querySelector('.signup-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var username = document.querySelector('#username-signup').value;
+    var email = document.querySelector('#email-signup').value;
+    var password = document.querySelector('#password-signup').value;
+    var data = {
+        username: username,
+        email: email,
+        password: password
+    };
+
+    fetch('/signup', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }).then(function(response) {
+        return response.json();
+    }).then(function(data) {
+        console.log(data);
+        if (data.error) {
+            alert(data.error);
+        } else {
+            // Redirect to 'editdraft' page if signup is successful
+           // Update the browser URL to '/editdraft' without a page reload
+console.log('im here is the')
+// Redirect to 'editdraft' page if signup is successful
+window.location.href = '/editdraft';
+        }
+    });
+});
+</script>
+      </div>
+    </form>
+  </div>

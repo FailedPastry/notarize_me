@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/User'); // Import your User model
-
+const User = require('../Model/models/user.js');
 // Define your user-related routes here
 router.get('/profile/:id', async (req, res) => {
   try {
