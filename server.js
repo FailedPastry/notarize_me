@@ -4,7 +4,11 @@ const session = require('express-session');
 const path = require('path');
 const exphbs = require('express-handlebars');
 const dotenv = require('dotenv');
-
+const fileUpload = require('express-fileupload');
+const cors = require('cors');
+const filesPayloadExists = require('./middleware/filesPayloadExists');
+const fileExtLimiter = require('./middleware/fileExtLimiter');
+const fileSizeLimiter = require('./middleware/fileSizeLimiter');
 dotenv.config();
 
 const app = express();
@@ -18,6 +22,8 @@ const sess = {
 };
 
 app.use(session(sess));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 const hbs = exphbs.create({
   defaultLayout: 'main',
@@ -74,19 +80,73 @@ app.get('/', (req, res) => {
 });
 
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}.`);
-});
 
 // Express route for user signup
 app.post('/api/signup', async (req, res) => {
   const { username, email, password } = req.body;
-
+  
   // Save user data to MongoDB using Mongoose
   const newUser = new User({ username, email, password });
   await newUser.save();
-
+  
   res.status(201).json({ message: 'User registered successfully' });
 });
 
 
+ // Allow CORS requests from localhost for development purposes
+ const allowedOrigins = ['http://localhost:*'];
+
+ app.use(cors({
+   origin: allowedOrigins,
+ }));
+
+app.options('*', cors());
+
+/*app.get('/upload', (req, res) => {
+  res.json(repos);
+});
+*/
+
+app.get('/upload', (req, res) => {
+  res.send('This is the upload endpoint');
+});
+
+
+// app.get('/upload', (req, res) => {
+// res.sendFile(path.join(__dirname, 'index.html'));
+// }); 
+
+
+app.post('/upload',
+  fileUpload({ createParentPath: true }),
+  filesPayloadExists,
+  fileExtLimiter(['.png', '.jpg', '.jpeg']),
+  fileSizeLimiter,
+  async (req, res) => {
+  try {
+    const files = req.files;
+
+    const movePromises = [];
+    Object.keys(files).forEach(key => {
+      if (files[key]) {
+        const filepath = path.join(__dirname, 'files', files[key].name);
+        movePromises.push(files[key].mv(filepath));
+        console.log(files[key].name);
+        console.log(files[key].size);
+      }
+    });
+
+    await Promise.all(movePromises);
+
+    return res.json({ status: 'success', message: Object.keys(files).toString() });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ status: "error", message: err });
+  }
+});
+
+
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}.`);
+});
