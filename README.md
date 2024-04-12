@@ -36,4 +36,4 @@ As a user, I want to:
 ## Links
 - Github Repo: https://github.com/FailedPastry/notarize_me
 - Deployed Site: 
-- Video: [public\images\notarizeMeApp.mp4](https://github.com/FailedPastry/notarize_me/blob/main/public/images/notarizeMeApp.mp4)
+- [!Video DEMO](https://img.youtube.com/vi/eThaE1ev27k/0.jpg)](https://www.youtube.com/watch?v=eThaE1ev27k)
