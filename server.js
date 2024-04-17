@@ -42,46 +42,21 @@ function isAuthenticated(req) {
 
 // Route to render the main HTML page
 app.get('/', (req, res) => {
-  res.render('editdraft'); // Render the editdraft partial
+  if (isAuthenticated(req)) {
+    res.render('editdraft'); // Render the editdraft partial if authenticated
+  } else {
+    res.render('login'); // Render the login view if not authenticated
+  }
 });
-
-// app.get('/', (req, res) => {
-//    {
-//     res.render('editdraft'); // Render the editdraft partial if authenticated
-//   } else {
-//     res.render('home'); // Render the home view if not authenticated
-//   }
-// });
-
-
 // Route for user login
 app.post('/login', async (req, res) => {
-  const { email, password } = req.body;
+  // Your login code here
+});
 
-  try {
-    // Find user by email
-    const user = await User.findOne({ email });
-
-    // Check if user exists
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-
-    // Compare passwords
-    const isPasswordValid = await bcrypt.compare(password, user.password);
-
-    if (!isPasswordValid) {
-      return res.status(401).json({ message: 'Invalid password' });
-    }
-
-    // Generate JWT
-    const token = jwt.sign({ userId: user._id }, 'your-secret-key', { expiresIn: '1h' });
-
-    res.json({ token });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Internal server error' });
-  }
+// Route to render the login page
+app.get('/login', (req, res) => {
+  // Render the login page
+  res.render('login');
 });
 
 // Route for user logout
@@ -95,24 +70,32 @@ app.get('/create', (req, res) => {
   res.render('create'); // Render the create account partial
 });
 
-app.get('/', (req, res) => {
-  
+// Route for user signup
+app.post('/signup', async (req, res) => {
+  // Implement user signup logic here
+  // After successful signup, redirect the user to the main page
+  res.redirect('/editdraft');
+});
 
-  res.render('partials/editdraft'); // Render the main Handlebars template
+// Route to render the main HTML page
+// app.get('/', (req, res) => {
+//   res.render('editdraft'); // Render the editdraft partial
+// });
+
+// Route to render the editdraft page
+app.get('/editdraft', (req, res) => {
+  // Check if the user is authenticated
+  if (isAuthenticated(req)) {
+    // If authenticated, render the editdraft page
+    res.render('editdraft');
+  } else {
+    // If not authenticated, redirect to the login page
+    res.redirect('/login');
+  }
 });
 
 
 
-// Express route for user signup
-app.post('/api/signup', async (req, res) => {
-  const { username, email, password } = req.body;
-  
-  // Save user data to MongoDB using Mongoose
-  const newUser = new User({ username, email, password });
-  await newUser.save();
-  
-  res.status(201).json({ message: 'User registered successfully' });
-});
 
 
  // Allow CORS requests from localhost for development purposes

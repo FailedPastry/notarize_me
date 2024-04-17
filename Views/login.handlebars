@@ -1,0 +1,67 @@
+<div class="row justify-space-between-md">
+  <div class="login-card">
+    <h2 class="page-title">Login</h2>
+    <form class="form login-form" id="loginForm" action="/login" method="post">
+      <div class="form-group">
+        <label for="email-login">Email:</label>
+      </div>
+        <input class="form-input" type="text" id="email-login" name="email" />
+      <div class="form-group">
+        <label for="password-login">Password:</label>
+      </div>
+        <input class="form-input" type="password" id="password-login" name="password" />
+      <div class="form-group">
+        <button class="btn btn-primary" type="submit">login</button>
+      </div>
+    </form>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-12 mt-3 mb-3">
+      <div class="footer text-center">
+        <p class="text-center"><small><a href="" class="text-dark font-weight-bold">Forgot Password?</a></small></p>
+        <p class="text-muted"><small>Don't have an account? <a href="/create" class="text-danger font-weight-bold">Create New Account</a></small></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sign-up">
+  <h2 class="page-title justify-center text-4xl">Signup</h2>
+  <form class="form signup-form" id="signupForm" action="/signup" method="post">
+    <div class="form-group">
+      <label for="username-signup">Username:</label>
+    </div>
+    <input class="form-input" type="text" id="username-signup" name="username" />
+    <div class="form-group">
+      <label for="email-signup">Email:</label>
+    </div>
+    <input class="form-input" type="text" id="email-signup" name="email" />
+    <div class="form-group">
+      <label for="password-signup">Password:</label>
+    </div>
+    <input class="form-input" type="password" id="password-signup" name="password" />
+    <div class="form-group">
+      <button class="btn btn-primary" type="submit">signup</button>
+    </div>
+  </form>
+</div>
+
+<script>
+  // Add event listener for login form submission
+  document.getElementById('loginForm').addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const response = await fetch('/login', {
+      method: 'POST',
+      body: formData
+    });
+    const data = await response.json();
+    // Handle login response
+  });
+
+  // Add event listener for signup form submission
+  document.getElementById('signupForm').addEventListener('submit', async (event) => {
+    // No need to prevent default action since it will redirect
+    // Automatically to the main page after signup
+  });
+</script>
